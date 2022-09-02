@@ -1,21 +1,10 @@
-//CONSUMIENDO APIS
-
-
 import {URI,PETICION} from '../helpers/DatospeticionGET.js'
+import {consultarCanciones} from './servicioconsultarcanciones.js'
+import {pintarCanciones} from '../controller/controladorPintarCanciones.js'
 
-//3. arranco pues
-//consumo el APIS
-fetch(URI,PETICION)
-.then(function(respuesta) {
-    return respuesta.json()
-})
-.then(function(respuesta){
-    console.log(respuesta)
-    console.log(respuesta.tracks)
-    let fila = document.getElementById("fila")
+//CONSUMIR UN API (CONSUMIR UN SERVICIO)
+let canciones=await consultarCanciones(URI,PETICION)
+console.log(canciones)
 
-    
-})
-.catch(function(error){
-    console.log(error)
-})
+//Renderizo los DATOS
+pintarCanciones(canciones.tracks)
